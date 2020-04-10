@@ -1,5 +1,5 @@
-#ifndef _DIRHLEPER_
-#define _DIRHELPER_
+#ifndef _dir_
+#define _dir_
 #include "diag.h"
 
 struct fileNode{
@@ -11,7 +11,7 @@ struct fileNode{
         w = 0;
         x = 0;
     }
-    fileNode(struct stat tmp, const char* st, int dep = 0){
+    fileNode(struct stat tmp, const char* st, int dep = 1){
         if (S_ISDIR(tmp.st_mode)) fileType = 1;
         else fileType = 0;
         r = tmp.st_mode & S_IRUSR;
@@ -47,11 +47,11 @@ public:
     vector<fileNode>& getfileTree(string path);
     fileNode getfile(string path);
     
-    bool makeDir(string);
-    void makeFileTree(vector<fileNode>&, string);
+    bool makeDir(string);//1 ok 0 dirfail
+    int makeFileTree(vector<fileNode>&, string);//1 ok 0 fail
     bool makeDir(fileNode);//V1.1 is to add time and root check
     bool makeFile(fileNode);
-    
+
     private:
         int MAXN;
         void initPath();

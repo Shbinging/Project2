@@ -106,13 +106,12 @@ bool Dir::makeDir(string path){
         fileNode a;
         a.fileType = 1;
         a.name = path;
-        makeDir(a);
-        return 1;
+        return makeDir(a);
     }
     else return 0;
 }
 
-void Dir::makeFileTree(vector<fileNode>& fileTree, string path){
+int Dir::makeFileTree(vector<fileNode>& fileTree, string path){
     setHome();
     setpath(path);
     int depth = 1;
@@ -120,7 +119,7 @@ void Dir::makeFileTree(vector<fileNode>& fileTree, string path){
         fileNode tmp = fileTree[i];
         if (tmp.fileType == 1){
                 depth += 1;
-                makeDir(tmp);
+                if (!makeDir(tmp)) return 0;
                 setpath(tmp.name);
         }
         else{
@@ -128,10 +127,11 @@ void Dir::makeFileTree(vector<fileNode>& fileTree, string path){
                 depth--;
                 setpath("..");
             }
-            makeFile(tmp);
+            if (!makeFile(tmp)) return 0;
         }
     }
     setHome();
+    return 1;
 }
 
 fileNode Dir::getfile(string path){

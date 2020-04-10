@@ -1,3 +1,5 @@
+#ifndef _diag_
+#define _diag_
 #include<bits/stdc++.h>
 #include <sys/stat.h>
 #include <dirent.h>
@@ -12,3 +14,4 @@
 
 using namespace std;
 
+#endif

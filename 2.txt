@@ -1,7 +1,0 @@
-echo "# Project2" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/Shbinging/Project2.git
-git push -u origin master
-https://blog.csdn.net/jiangyu1013/article/details/84031418

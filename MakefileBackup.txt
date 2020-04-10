@@ -14,3 +14,9 @@ clean:
 	rm *.o VShell
 run:
 	./VShell
+
+		g++ main.o DirHelper.o -o test
+DirHelper.o : DirHelper.h diag.h 
+	g++ -g -c DirHelper.cpp
+main.o: diag.h DirHelper.h
+	g++ -g -c main.cpp
