@@ -1,0 +1,16 @@
+VShell : main.o DirHelper.o CommandWC.o CommandMAN.o CommandCP.o CommandCAT.o Command.o UI.o
+	g++ main.o DirHelper.o CommandWC.o CommandMAN.o CommandCP.o CommandCAT.o Command.o UI.o -o VShell
+main.o : UI.h
+DirHelper.o : DirHelper.h
+Command.o : Command.h DirHelper.h
+CommandWC.o : CommandWC.h DirHelper.h
+CommandMAN.o : CommandMAN.h DirHelper.h
+CommandCP.o : CommandCP.h DirHelper.h
+CommandCAT.o : CommandCAT.h DirHelper.h
+Command.o : Command.h
+UI.o : UI.h Command.h
+
+clean:
+	rm *.o VShell
+run:
+	./VShell
