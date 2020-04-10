@@ -1,3 +1,5 @@
+-2:
+-1:a > b
 1:calls wrong
 2:arguments wrong
 
@@ -13,3 +15,4 @@
 13:when copy something fail
 14:secced
 15:this not a dir
+16:can't open the file

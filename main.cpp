@@ -1,5 +1,4 @@
-#include "DirHelper.h"
-#include "CommandCP.h"
+#include "CommandCMP.h"
 int main(){
     //char pwd[500];
 	/* getcwd(pwd, 500);
@@ -28,7 +27,7 @@ int main(){
     }*/
     string st;
     getline(cin, st);
-    CommandCP a;
-    cout << a.run(st);
+    CommandCMP* a = new CommandCMP;
+    cout << a->run(st);
     return 0;
 }

@@ -5,6 +5,7 @@
 struct fileNode{
     fileNode(){
         file = NULL;
+        file1 = NULL;
         name = "";
         fileType = 0;
         r = 0;
@@ -19,13 +20,14 @@ struct fileNode{
         x = tmp.st_mode & S_IXUSR;
         name = st;
         file = fopen(st, "rb");
+        file1 = fopen(st, "r");
         time = tmp.st_mtime;
         depth = dep;
     }
     string name;
     bool fileType;//0 file 1 dir
     bool r, w, x;// read write excute
-    FILE* file;  
+    FILE* file, *file1;  
     time_t time;  
     int depth;
 };

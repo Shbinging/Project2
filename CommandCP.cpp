@@ -1,5 +1,5 @@
 #include "CommandCP.h"
-#include "algori.h"
+
 int CommandCP::run(string st){
     vector<string> a = st_split(st);
     if (a.size() < 3 || a.size() > 4) return 2;
@@ -20,6 +20,7 @@ int CommandCP::run(string st){
         if (!dir.ispathExsist(a[3]) && !dir.makeDir(a[3])) return 12;
         vector<fileNode>& b = dir.getfileTree(a[2]);
         if (!dir.makeFileTree(b, a[3])) return 13;
+        dir.closeFileTree();
         return 14;
     }
 }

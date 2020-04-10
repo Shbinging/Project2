@@ -67,6 +67,7 @@ bool Dir::isFile(string path){//1 file 0 dir
 void Dir::closeFileTree(){
     For(i, 0, int(fileTree.size()) - 1){
         if (fileTree[i].file != NULL) fclose(fileTree[i].file);
+        if (fileTree[i].file1 != NULL) fclose(fileTree[i].file1);
     }
     fileTree.clear();
 }
