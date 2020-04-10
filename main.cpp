@@ -19,11 +19,11 @@ int main(){
     dir.makeFileTree(fileTree, "../test1");
     dir.setpath(dir.oriPath);
     fileTree = dir.getfileTree("../test1");
-    For(i, 0, int(fileTree.size() - 1)){
+   /* For(i, 0, int(fileTree.size() - 1)){
       For(j, 1, fileTree[i].depth) cout << "\t";
         cout << fileTree[i].name;
         if (fileTree[i].fileType == 1) cout << "/";
         cout << endl;
-    }
+    }*/
     return 0;
 }

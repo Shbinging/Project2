@@ -10,6 +10,17 @@ void Dir::initPath(){
     getcwd(oriPath, MAXN);
 }
 
+void Dir::setHome(){
+    setpath(oriPath);
+}
+
+string Dir::getPath(){
+    char pwd[MAXN];
+	getcwd(pwd, MAXN);
+	string tmp = pwd;
+    return tmp;
+}
+
 bool Dir::setpath(string path){//original the shell's location 1 exceed 0 fail
     if (chdir(path.c_str()) == 0) return 1;
     else return 0;
@@ -27,7 +38,6 @@ void Dir::printdir(const char *dir, int depth)//run all over the dir
 	struct dirent *entry;
 	struct stat statbuf;
     	if ((dp = opendir(dir)) == NULL) {
-		fprintf(stderr, "Can`t open directory %s\n", dir);
 		return ;
 	}
     chdir(dir);
@@ -43,7 +53,6 @@ void Dir::printdir(const char *dir, int depth)//run all over the dir
         else
 			fileTree.push_back(fileNode(statbuf, entry->d_name, depth+1));
 	}
-    
 	chdir("..");
 	closedir(dp);	
 }
@@ -55,15 +64,22 @@ bool Dir::isFile(string path){//1 file 0 dir
     else return 1;
 }
 
-vector<fileNode>& Dir::getfileTree(string path){
+void Dir::closeFileTree(){
+    For(i, 0, int(fileTree.size()) - 1){
+        if (fileTree[i].file != NULL) fclose(fileTree[i].file);
+    }
     fileTree.clear();
+}
+
+vector<fileNode>& Dir::getfileTree(string path){
+    closeFileTree();
     printdir(path.c_str(), 0);
-    setpath(oriPath);
+    setHome();
     return fileTree;
 }
 
 bool Dir::makeFile(fileNode tmp){
-    FILE* fout = fopen(tmp.name.c_str(), "bw");
+    FILE* fout = fopen(tmp.name.c_str(), "wb");
     FILE* fin = tmp.file;
     if (fin == NULL|| fout == NULL) return 0;
     char ch;
@@ -97,16 +113,14 @@ bool Dir::makeDir(string path){
 }
 
 void Dir::makeFileTree(vector<fileNode>& fileTree, string path){
-    setpath(oriPath);
+    setHome();
     setpath(path);
     int depth = 1;
     For(i, 0, int(fileTree.size()) - 1){
         fileNode tmp = fileTree[i];
-     char pwd[500];
-	getcwd(pwd, 500);
-	printf("\ngetcwd pwd is %s\n",pwd);
         if (tmp.fileType == 1){
                 depth += 1;
+                makeDir(tmp);
                 setpath(tmp.name);
         }
         else{
@@ -117,6 +131,7 @@ void Dir::makeFileTree(vector<fileNode>& fileTree, string path){
             makeFile(tmp);
         }
     }
+    setHome();
 }
 
 fileNode Dir::getfile(string path){

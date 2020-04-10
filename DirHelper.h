@@ -33,20 +33,30 @@ struct fileNode{
 class Dir{
 public:
     Dir();
-    vector<fileNode> fileTree;
+    vector<fileNode> fileTree;//dirctory list
+    char oriPath[3000];//homepath
+
     bool setpath(string path = ".");//original the shell's location
+    void setHome();
+    string getPath();
     bool ispathExsist(string path);//1 Exsist 0 not Exsist
     bool isFile(string path);//1 file 0 dir
-    void initPath();
-    void printdir(const char*, int);
+    
+    void closeFileTree();
+
     vector<fileNode>& getfileTree(string path);
     fileNode getfile(string path);
-    int MAXN;
-    char oriPath[3000];
+    
     bool makeDir(string);
     void makeFileTree(vector<fileNode>&, string);
     bool makeDir(fileNode);//V1.1 is to add time and root check
     bool makeFile(fileNode);
+    
+    private:
+        int MAXN;
+        void initPath();
+        void printdir(const char*, int);
+
 };
 extern Dir dir;
 #endif
