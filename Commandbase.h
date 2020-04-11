@@ -6,7 +6,7 @@
 class CommandBase{
     public:
     virtual int run(string){}
-    virtual string help(){}
+    void help(string);
 };
 
 #endif

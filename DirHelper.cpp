@@ -1,6 +1,6 @@
 #include "DirHelper.h"
 
-vector<fileNode> fileTree;
+
 
 Dir::Dir(){
     MAXN = 3000;
@@ -8,10 +8,15 @@ Dir::Dir(){
 }
 void Dir::initPath(){
     getcwd(oriPath, MAXN);
+    getcwd(homePath, MAXN);
 }
 
 void Dir::setHome(){
-    setpath(oriPath);
+    chdir(homePath);
+}
+
+void Dir::setOri(){
+    chdir(oriPath);
 }
 
 string Dir::getPath(){
@@ -21,8 +26,17 @@ string Dir::getPath(){
     return tmp;
 }
 
+bool Dir::setpath1(string path){
+    if (chdir(path.c_str()) == 0){
+        getcwd(homePath, MAXN);
+        return 1;
+    }
+    else return 0;
+}
 bool Dir::setpath(string path){//original the shell's location 1 exceed 0 fail
-    if (chdir(path.c_str()) == 0) return 1;
+    if (chdir(path.c_str()) == 0){
+        return 1;
+    }
     else return 0;
 }
 
@@ -32,8 +46,9 @@ bool Dir::ispathExsist(string path){//1 Exsist 0 not Exsist
     else return 0;
 }
 
-void Dir::printdir(const char *dir, int depth)//run all over the dir
+void Dir::printdir(const char *dir, int depth, int depMax)//run all over the dir
 {
+    if (depth > depMax) return;
 	DIR *dp;
 	struct dirent *entry;
 	struct stat statbuf;
@@ -48,7 +63,7 @@ void Dir::printdir(const char *dir, int depth)//run all over the dir
 				strcmp(entry->d_name, "..") == 0 )  
 				continue;	
 			fileTree.push_back(fileNode(statbuf, entry->d_name, depth+1));
-			printdir(entry->d_name, depth+1);
+			printdir(entry->d_name, depth+1, depMax);
 		} 
         else
 			fileTree.push_back(fileNode(statbuf, entry->d_name, depth+1));
@@ -72,9 +87,9 @@ void Dir::closeFileTree(){
     fileTree.clear();
 }
 
-vector<fileNode>& Dir::getfileTree(string path){
+vector<fileNode>& Dir::getfileTree(string path, int depMax){
     closeFileTree();
-    printdir(path.c_str(), 0);
+    printdir(path.c_str(), 0, depMax);
     setHome();
     return fileTree;
 }
@@ -82,7 +97,7 @@ vector<fileNode>& Dir::getfileTree(string path){
 bool Dir::makeFile(fileNode tmp){
     FILE* fout = fopen(tmp.name.c_str(), "wb");
     FILE* fin = tmp.file;
-    if (fin == NULL|| fout == NULL) return 0;
+    if (fin == NULL|| fout == NULL) {fclose(fout);return 0;}
     char ch;
     fread(&ch, sizeof(char), 1, fin);
     while(!feof(fin)){
@@ -139,6 +154,24 @@ fileNode Dir::getfile(string path){
     struct stat statbuf;
     stat(path.c_str(), &statbuf);
     return fileNode(statbuf, path.c_str());
+}
+
+vector<string>& Dir::getfileContent(string path){
+    FILE* fin = getfile(path).file;
+    fileContent.clear();
+    if (fin == NULL){
+        fileContent.push_back("NULL");
+        fclose(fin);
+        return fileContent;
+    }
+    int MAXN = 100000;
+    char ch1[MAXN];
+    while(fgets(ch1, MAXN, fin) != NULL){
+        string st = ch1;
+        fileContent.push_back(st);
+    }
+    fclose(fin);
+    return fileContent;
 }
 
 Dir dir;

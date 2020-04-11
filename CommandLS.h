@@ -1,9 +1,10 @@
-#ifndef _CCAT
-#define _CCAT
+#ifndef _CLS
+#define _CLS
 #include "Commandbase.h"
 #include "algori.h"
-class CommandCAT:public CommandBase{
+class CommandLS:public CommandBase{
 public:
     virtual int run(string st);
+    
 };
 #endif

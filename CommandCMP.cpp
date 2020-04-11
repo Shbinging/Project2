@@ -54,7 +54,3 @@ int CommandCMP::run(string st){
     fclose(fin2);
     return 14;
 }
-string CommandCMP::help(){
-    cout << "2" << endl;
-    return "2";
-}

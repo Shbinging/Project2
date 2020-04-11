@@ -1,4 +1,4 @@
-#include "CommandWC.h"
+#include "UI.h"
 int main(){
     //char pwd[500];
 	/* getcwd(pwd, 500);
@@ -25,9 +25,11 @@ int main(){
         if (fileTree[i].fileType == 1) cout << "/";
         cout << endl;
     }*/
-    string st;
+    /* string st;
     getline(cin, st);
-    CommandWC* a = new CommandWC;
-    cout << a->run(st);
+    CommandLS* a = new CommandLS;
+    cout << a->run(st) << endl;*/
+    UI a;
+    a.run();
     return 0;
 }

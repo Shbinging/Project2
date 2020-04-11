@@ -6,7 +6,7 @@ int CommandWC::run(string st){
     string path = a[2];
     if (!dir.ispathExsist(a[2])) return 10;
     if (!dir.isFile(a[2])) return 11;
-    vector<int> b = calc(dir.getfile(path));
+    vector<int> b = calc(dir.getfile(path), path);
     if (b[0] == -1) return 16;
     if (a[1] == "-c"){
         printf("number of byte is %d\n", b[0]);
@@ -19,11 +19,11 @@ int CommandWC::run(string st){
     if (a[1] == "-l"){
         printf("number of line is %d\n", b[2]);
     }
-    else return 2;
+    else return 17;
     return 14;
 }
 
-vector<int> CommandWC::calc(fileNode tmp){
+vector<int> CommandWC::calc(fileNode tmp, string path){
     FILE* fin = tmp.file;
     vector<int> ans;
     if (fin == NULL){
@@ -41,10 +41,11 @@ vector<int> CommandWC::calc(fileNode tmp){
     ans.push_back(s);
     int MAXN = 100000;
     char ch1[MAXN];
+    vector<string> & b = dir.getfileContent(path);
     int ls = 0;
     s = 0;
-    while(fgets(ch1, MAXN, fin) != NULL){
-        string st = ch1;
+    For(i, 0, int(b.size()) -1){
+        string st = b[i];
         vector<string>  a = st_split(st);
         s += a.size();
         if (st != "") ls++;
@@ -52,9 +53,4 @@ vector<int> CommandWC::calc(fileNode tmp){
     ans.push_back(s);
     ans.push_back(ls);
     return ans;
-}
-
-string CommandWC::help(){
-    cout <<"3"<<endl;
-    return "3";
 }

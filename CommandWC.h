@@ -4,8 +4,7 @@
 #include "algori.h"
 class CommandWC:public CommandBase{
 public:
-    int run(string st);
-    string help();
-    vector<int> calc(fileNode tmp);
+    virtual int run(string st);
+    vector<int> calc(fileNode tmp, string path);
 };
 #endif

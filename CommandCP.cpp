@@ -7,6 +7,7 @@ int CommandCP::run(string st){
         if (!dir.ispathExsist(a[1])) return 10;
         if (!dir.isFile(a[1])) return 11;
         if (!dir.ispathExsist(a[2]) && !dir.makeDir(a[2])) return 12;
+        if (dir.ispathExsist(a[2]) && dir.isFile(a[2])) return 12;
         vector<fileNode> b;
         fileNode c = dir.getfile(a[1]);
         b.push_back(c);
@@ -14,7 +15,7 @@ int CommandCP::run(string st){
         return 14;
     }
     else{
-        if (a[1] != "-r") return 2;
+        if (a[1] != "-r") return 17;
         if (!dir.ispathExsist (a[2])) return 10;
         if (dir.isFile(a[2])) return 15;
         if (!dir.ispathExsist(a[3]) && !dir.makeDir(a[3])) return 12;
@@ -23,9 +24,5 @@ int CommandCP::run(string st){
         dir.closeFileTree();
         return 14;
     }
-}
-
-string CommandCP::help(){
-    return "1";
 }
 
