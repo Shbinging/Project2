@@ -1,4 +1,4 @@
-#include "CommandCMP.h"
+#include "CommandWC.h"
 int main(){
     //char pwd[500];
 	/* getcwd(pwd, 500);
@@ -27,7 +27,7 @@ int main(){
     }*/
     string st;
     getline(cin, st);
-    CommandCMP* a = new CommandCMP;
+    CommandWC* a = new CommandWC;
     cout << a->run(st);
     return 0;
 }

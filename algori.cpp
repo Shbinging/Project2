@@ -1,12 +1,12 @@
 #include"algori.h"
 
-vector<string> st_split(string st, char opt){
+vector<string> st_split(string st, char opt1, char opt2){
     vector<string> a;
-    st += opt;
+    st += opt1;
     string st1 = "";
-    bool f = 0;
+    bool f = 1;
     For(i, 0, int(st.length()) - 1){
-        if (st[i] != opt){
+        if (st[i] != opt1 && st[i] != opt2 && st[i] != '\r' && st[i] != '\n'){
             if (f == 1){
                 f = 0;
                 st1 = "";
