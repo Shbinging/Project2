@@ -4,6 +4,7 @@
 #include "algori.h"
 class CommandCP:public CommandBase{
     public:
+        CommandCP(Dir& tmp):CommandBase(tmp){}
         virtual int run(string st);//V1.0 overwrite V1.1 overwrite check
 };
 #endif

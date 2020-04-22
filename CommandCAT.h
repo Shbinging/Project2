@@ -4,6 +4,7 @@
 #include "algori.h"
 class CommandCAT:public CommandBase{
 public:
+    CommandCAT(Dir& tmp):CommandBase(tmp){}
     virtual int run(string st);
 };
 #endif

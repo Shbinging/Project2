@@ -8,6 +8,10 @@
         "initializer_list": "cpp",
         "regex": "cpp",
         "utility": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "vector": "cpp",
+        "complex": "cpp",
+        "functional": "cpp",
+        "*.tcc": "cpp"
     }
 }

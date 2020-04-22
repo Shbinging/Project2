@@ -2,14 +2,17 @@
 
 
 
-Dir::Dir(){
+Dir::Dir(string path){
     MAXN = 3000;
-    initPath();
+    if (path == "."){
+        getcwd(homePath, MAXN);
+    }
+    else{
+        strcpy(homePath, path.c_str());
+        setpath1(path);
+    }
 }
-void Dir::initPath(){
-    getcwd(oriPath, MAXN);
-    getcwd(homePath, MAXN);
-}
+
 
 void Dir::setHome(){
     chdir(homePath);
@@ -161,17 +164,17 @@ vector<string>& Dir::getfileContent(string path){
     fileContent.clear();
     if (fin == NULL){
         fileContent.push_back("NULL");
-        fclose(fin);
         return fileContent;
     }
     int MAXN = 100000;
     char ch1[MAXN];
     while(fgets(ch1, MAXN, fin) != NULL){
         string st = ch1;
+        string st1 = "";
         fileContent.push_back(st);
     }
     fclose(fin);
     return fileContent;
 }
 
-Dir dir;
+char Dir::oriPath[3000];

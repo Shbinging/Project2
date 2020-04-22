@@ -21,3 +21,11 @@ vector<string> st_split(string st, char opt1, char opt2){
     }
     return a;
 }
+
+string st_edit(string st){
+    string tmp = "";
+    for (int i = 0; i < st.length(); i++){
+        if (st[i] != '\r' && st[i] != '\n') tmp += st[i];
+    }
+    return tmp;
+}

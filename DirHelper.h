@@ -34,10 +34,10 @@ struct fileNode{
 
 class Dir{
 public:
-    Dir();
+    Dir(string path);
     vector<string> fileContent;
     vector<fileNode> fileTree;//dirctory list
-    char oriPath[3000];//homepath
+    static char oriPath[3000];//homepath
     char homePath[3000];
 
     bool setpath(string path = ".");//original the shell's location
@@ -61,11 +61,13 @@ public:
     bool makeDir(fileNode);//V1.1 is to add time and root check
     bool makeFile(fileNode);
 
+    static void initPath(){
+        getcwd(oriPath, 3000);
+    }
     private:
         int MAXN;
-        void initPath();
         void printdir(const char*, int, int);
 
 };
-extern Dir dir;
+
 #endif

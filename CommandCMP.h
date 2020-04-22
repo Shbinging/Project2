@@ -4,6 +4,7 @@
 #include "algori.h"
 class CommandCMP:public CommandBase{
 public:
+    CommandCMP(Dir& tmp):CommandBase(tmp){}
     virtual int run(string st);
 };
 #endif

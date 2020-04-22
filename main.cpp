@@ -29,7 +29,8 @@ int main(){
     getline(cin, st);
     CommandLS* a = new CommandLS;
     cout << a->run(st) << endl;*/
-    UI a;
+    Dir::initPath();
+    UI a(".");
     a.run();
     return 0;
 }

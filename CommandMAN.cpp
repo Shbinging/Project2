@@ -8,7 +8,7 @@ int CommandMAN::run(string st){
     vector<string> b = dir.getfileContent(path); 
     dir.setHome();
     if (b.empty()) return 14;
-    if (b[0] == "NULL") return 17;
+    if (b[0] == "NULL") return 2;
     help(path);
     return 14;
 }

@@ -4,6 +4,7 @@
 #include "algori.h"
 class CommandMAN:public CommandBase{
 public:
+    CommandMAN(Dir& tmp):CommandBase(tmp){}
     virtual int run(string st);
     
 };

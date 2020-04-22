@@ -8,7 +8,7 @@ int CommandCAT::run(string st){
     if (b[0] == "NULL") return 16;
     else{
         For(i, 0, int(b.size()) - 1){
-            cout << b[i] << endl;
+            cout << b[i];
         }
         return 14;
     }
